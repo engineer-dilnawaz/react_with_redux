@@ -129,6 +129,12 @@ form button {
   margin-inline: auto;
 }
 
+.wishlist-items-container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
 .cart-container h2 {
   text-align: center;
   margin: 32px 0;
@@ -168,6 +174,11 @@ form button {
   gap: 12px;
 }
 
+.icons-container {
+  display: flex;
+  gap: 2rem;
+}
+
 .cart-icon {
   position: relative;
 }
@@ -186,4 +197,56 @@ form button {
   top: 0;
   left: 50%;
   transform: translate(-40%, -90%);
+}
+
+.wishlist-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  box-shadow: inset 0px 0px 13px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  text-align: center;
+  padding-block: 2rem;
+}
+
+.wishlist-item-container > img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.wishlist-item-container > h3 {
+  max-width: 70%;
+  margin: 0.5rem 0 0 0;
+  vertical-align: middle;
+}
+
+.wishlist-item-container > p {
+  margin: 0;
+  margin-block: 0.5rem;
+}
+
+.wishlist-item-container > button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding-inline: 0.5rem;
+  border-radius: 1rem;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+}
+.wishlist-item-container > button > h3 {
+  color: #e72121;
+  margin: 0;
+}
+
+.delete-icon-container {
+  cursor: pointer;
+}
+
+.delete-icon-container img {
+  width: 30px;
 }
