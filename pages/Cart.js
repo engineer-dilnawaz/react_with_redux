@@ -29,12 +29,27 @@ export default function Cart() {
   //   },
   // ];
 
-  const cartItems = useSelector((state) => state.cartItem);
+  const cartItems = useSelector(({ products, cartItem }) => {
+    return cartItem.list
+      .map(({ productId, quantity }) => {
+        const addedItem = products.list.find(
+          (product) => product.id === productId
+        );
+        return { ...addedItem, quantity };
+      })
+      .filter(({ title }) => title);
+  });
+
+  const { loading, error } = useSelector((state) => state.cartItem);
 
   const totalPrice = cartItems.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
+
+  if (loading) return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
+
+  if (error) return <h2 style={{ textAlign: "center" }}>{error}</h2>;
 
   return (
     <div className="cart-container">
@@ -47,15 +62,15 @@ export default function Cart() {
           <div className="total">Total</div>
         </div>
         {cartItems.map(
-          ({ productId, title, rating, price, imageUrl, quantity }) => (
+          ({ id, title, rating, price, image, quantity }, index) => (
             <CartItem
-              key={productId}
+              key={index}
               title={title}
               price={price}
               quantity={quantity}
-              imageUrl={imageUrl}
-              rating={rating}
-              productId={productId}
+              imageUrl={image}
+              rating={rating.rate}
+              productId={id}
             />
           )
         )}

@@ -10,33 +10,49 @@ function findItemIndex(state, action) {
 // Reducers
 const slice = createSlice({
   name: "cart",
-  initialState: [],
+  initialState: {
+    loading: false,
+    list: [],
+    error: "",
+  },
   reducers: {
+    fetchCartItem(state, action) {
+      state.loading = true;
+    },
+    fetchCartItemsError(state, action) {
+      state.loading = false;
+      state.error = action.payload || "Something went wrong";
+    },
+    loadCartItems(state, action) {
+      state.loading = false;
+      state.error = "";
+      state.list = action.payload.flatMap((order) => order.products);
+    },
     addCartItem(state, action) {
-      const existingItemIndex = findItemIndex(state, action);
+      const existingItemIndex = findItemIndex(state.list, action);
       if (existingItemIndex !== -1) {
-        state[existingItemIndex].quantity += 1;
+        state.list[existingItemIndex].quantity += 1;
       } else {
-        state.push({ ...action.payload, quantity: 1 });
+        state.list.push({ ...action.payload, quantity: 1 });
       }
     },
     removeCartItem(state, action) {
-      const existingItemIndex = findItemIndex(state, action);
-      state.splice(existingItemIndex, 1);
+      const existingItemIndex = findItemIndex(state.list, action);
+      state.list.splice(existingItemIndex, 1);
     },
     increaseCartItemQuantity: {
       reducer: (state, action) => {
-        const existingItemIndex = findItemIndex(state, action);
-        state[existingItemIndex].quantity += 1;
+        const existingItemIndex = findItemIndex(state.list, action);
+        state.list[existingItemIndex].quantity += 1;
       },
       prepare: (productId) => ({ payload: { productId } }),
     },
     decreaseCartItemQuantity: {
       reducer: (state, action) => {
-        const existingItemIndex = findItemIndex(state, action);
-        state[existingItemIndex].quantity -= 1;
-        if (state[existingItemIndex].quantity === 0) {
-          state.splice(existingItemIndex, 1);
+        const existingItemIndex = findItemIndex(state.list, action);
+        state.list[existingItemIndex].quantity -= 1;
+        if (state.list[existingItemIndex].quantity === 0) {
+          state.list.splice(existingItemIndex, 1);
         }
       },
       prepare: (productId) => ({ payload: { productId } }),
@@ -48,6 +64,9 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const {
+  fetchCartItem,
+  loadCartItems,
+  fetchCartItemsError,
   addCartItem,
   removeCartItem,
   increaseCartItemQuantity,

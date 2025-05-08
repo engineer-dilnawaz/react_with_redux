@@ -15,7 +15,7 @@ export default function Product({ productId, title, rating, price, imageUrl }) {
   });
 
   function handleAddToCart() {
-    dispatch(addCartItem({ productId, title, rating, price, imageUrl }));
+    dispatch(addCartItem({ productId }));
   }
 
   function handleRemoveFromCart() {
@@ -34,7 +34,7 @@ export default function Product({ productId, title, rating, price, imageUrl }) {
     (wishlistItem) => wishlistItem.productId === productId
   );
 
-  const hasAddedToCart = cartItems.some(
+  const hasAddedToCart = cartItems.list.some(
     (cartItem) => cartItem.productId === productId
   );
 
