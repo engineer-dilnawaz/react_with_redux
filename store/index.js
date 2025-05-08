@@ -1,16 +1,8 @@
 import { combineReducers, createStore } from "redux";
 
-import cartReducer, {
-  addCartItem,
-  decreaseCartItemQuantity,
-  increaseCartItemQuantity,
-  removeCartItem,
-} from "./cartReducer";
-import productsReducer from "./productsReducer";
-import wishListReducer, {
-  addWishlistItem,
-  removeWishlistItem,
-} from "./wishListReducer";
+import cartReducer from "./slices/cartReducer";
+import productsReducer from "./slices/productsReducer";
+import wishListReducer from "./slices/wishListReducer";
 
 const rootReducer = combineReducers({
   products: productsReducer,

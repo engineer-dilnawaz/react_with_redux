@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   decreaseCartItemQuantity,
   increaseCartItemQuantity,
-} from "../store/cartReducer";
+} from "../store/slices/cartReducer";
 
 export default function CartItem({
   productId,
