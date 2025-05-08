@@ -1,20 +1,30 @@
-import { combineReducers, createStore } from "redux";
+// import { combineReducers, createStore } from "redux";
+// import { produce } from "immer";
+import { configureStore } from "@reduxjs/toolkit";
 
 import cartReducer from "./slices/cartSlice";
 import productsReducer from "./slices/productsSlice";
 import wishListReducer from "./slices/wishListSlice";
-import { produce } from "immer";
 
-const rootReducer = combineReducers({
-  products: productsReducer,
-  cartItem: cartReducer,
-  wishList: wishListReducer,
+export const store = configureStore({
+  reducer: {
+    products: productsReducer,
+    cartItem: cartReducer,
+    wishList: wishListReducer,
+  },
+  // devTools: false, //enable and disable dev tools
 });
 
-export const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// const rootReducer = combineReducers({
+//   products: productsReducer,
+//   cartItem: cartReducer,
+//   wishList: wishListReducer,
+// });
+
+// export const store = createStore(
+//   rootReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 // store.dispatch(addCartItem(1, 5));
 // store.dispatch(addCartItem(12));
