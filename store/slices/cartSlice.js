@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { produce } from "immer";
 
 function findItemIndex(state, action) {
   return state.findIndex(
@@ -43,6 +44,7 @@ const slice = createSlice({
   },
 });
 
+// export default slice.reducer;
 export default slice.reducer;
 
 export const {
@@ -51,6 +53,8 @@ export const {
   increaseCartItemQuantity,
   decreaseCartItemQuantity,
 } = slice.actions;
+
+// console.log(addCartItem(1233));
 
 /*
 const initialState = [];
