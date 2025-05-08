@@ -40,10 +40,7 @@ export default function Header() {
     dispatch(fetchCartItem());
     fetch("https://fakestoreapi.com/carts")
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch(loadCartItems(data));
-      })
+      .then((data) => dispatch(loadCartItems(data)))
       .catch((e) => dispatch(fetchCartItemsError()));
   }, []);
 

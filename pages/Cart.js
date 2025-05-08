@@ -1,5 +1,10 @@
 import { useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
+import {
+  getAllCartItems,
+  getCartError,
+  getCartLoadingState,
+} from "../store/slices/cartSlice";
 
 export default function Cart() {
   // const cartItems = [
@@ -29,18 +34,9 @@ export default function Cart() {
   //   },
   // ];
 
-  const cartItems = useSelector(({ products, cartItem }) => {
-    return cartItem.list
-      .map(({ productId, quantity }) => {
-        const addedItem = products.list.find(
-          (product) => product.id === productId
-        );
-        return { ...addedItem, quantity };
-      })
-      .filter(({ title }) => title);
-  });
-
-  const { loading, error } = useSelector((state) => state.cartItem);
+  const cartItems = useSelector(getAllCartItems);
+  const loading = useSelector(getCartLoadingState);
+  const error = useSelector(getCartError);
 
   const totalPrice = cartItems.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
