@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItem, removeCartItem } from "../store/slices/cartReducer";
+import { addCartItem, removeCartItem } from "../store/slices/cartSlice";
 import {
   addWishlistItem,
   removeWishlistItem,
-} from "../store/slices/wishListReducer";
+} from "../store/slices/wishListSlice";
 
 export default function Product({ productId, title, rating, price, imageUrl }) {
   const dispatch = useDispatch();

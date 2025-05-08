@@ -1,8 +1,9 @@
 import { combineReducers, createStore } from "redux";
 
-import cartReducer from "./slices/cartReducer";
-import productsReducer from "./slices/productsReducer";
-import wishListReducer from "./slices/wishListReducer";
+import cartReducer from "./slices/cartSlice";
+import productsReducer from "./slices/productsSlice";
+import wishListReducer from "./slices/wishListSlice";
+import { produce } from "immer";
 
 const rootReducer = combineReducers({
   products: productsReducer,
@@ -34,3 +35,33 @@ export const store = createStore(
 // store.dispatch(removeWishlistItem(1));
 
 // console.log(store.getState());
+
+// const users = [
+//   {
+//     name: "Dilnawaz",
+//     age: 26,
+//   },
+//   {
+//     name: "Ahmed",
+//     age: 46,
+//   },
+//   {
+//     name: "Bilal",
+//     age: 16,
+//   },
+// ];
+
+// users[1].age = 20;
+
+// const newUsers = users.map((user, index) =>
+//   index === 1 ? { ...user, age: 20 } : user
+// );
+// console.log(newUsers);
+// console.log(users);
+
+// const immerUsers = produce(users, (usersCopy) => {
+//   usersCopy[1].age = 20;
+// });
+
+// console.log(immerUsers);
+// console.log(users);

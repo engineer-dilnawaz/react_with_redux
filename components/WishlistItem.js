@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import DeleteIcon from "url:../assets/delete-icon.svg";
-import { removeWishlistItem } from "../store/slices/wishListReducer";
+import { removeWishlistItem } from "../store/slices/wishListSlice";
 
 export default function WishlistItem({
   productId,
