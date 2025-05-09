@@ -15,6 +15,7 @@ import {
   fetchCartItemsError,
   loadCartItems,
 } from "../store/slices/cartSlice";
+import { fetchData } from "../store/middleware/api";
 
 export default function Header() {
   const { cartItems, wishListItems } = useSelector((state) => {
@@ -30,18 +31,54 @@ export default function Header() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    // dispatch(fetchProducts());
+    // fetch("https://fakestoreapi.com/products")
+    //   .then((response) => response.json())
+    //   .then((data) => dispatch(updateAllProducts(data)))
+    //   .catch((e) => dispatch(fetchProductsError()));
+    // dispatch({
+    //   type: "api/makeCall",
+    //   payload: {
+    //     url: "/products",
+    //     onStart: fetchProducts.type,
+    //     onSuccess: updateAllProducts.type,
+    //     onError: fetchProductsError.type,
+    //   },
+    // });
 
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => dispatch(updateAllProducts(data)))
-      .catch((e) => dispatch(fetchProductsError()));
+    dispatch(
+      fetchData({
+        url: "/products",
+        onStart: fetchProducts.type,
+        onSuccess: updateAllProducts.type,
+        onError: fetchProductsError.type,
+      })
+    );
 
-    dispatch(fetchCartItem());
-    fetch("https://fakestoreapi.com/carts")
-      .then((response) => response.json())
-      .then((data) => dispatch(loadCartItems(data)))
-      .catch((e) => dispatch(fetchCartItemsError()));
+    // dispatch(fetchCartItem());
+    // fetch("https://fakestoreapi.com/carts")
+    //   .then((response) => response.json())
+    //   .then((data) => dispatch(loadCartItems(data)))
+    //   .catch((e) => dispatch(fetchCartItemsError()));
+
+    // dispatch({
+    //   type: "api/makeCall",
+    //   payload: {
+    //     url: "/carts",
+    //     onStart: fetchCartItem.type,
+    //     onSuccess: loadCartItems.type,
+    //     onError: fetchCartItemsError.type,
+    //   },
+    // });
+
+    dispatch(
+      fetchData({
+        url: "/carts",
+        onStart: fetchCartItem.type,
+        onSuccess: loadCartItems.type,
+        onError: fetchCartItemsError.type,
+      })
+    );
   }, []);
 
   return (
