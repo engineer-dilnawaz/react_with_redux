@@ -38,3 +38,11 @@ export const { fetchProducts, fetchProductsError, updateAllProducts } =
 export const getAllProducts = (state) => state.products.list;
 export const getProductLoadingState = (state) => state.products.loading;
 export const getProductError = (state) => state.products.error;
+
+export const fetchProductsData = () => (dispatch) => {
+  dispatch(fetchProducts());
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => dispatch(updateAllProducts(data)))
+    .catch((e) => dispatch(fetchProductsError()));
+};

@@ -88,6 +88,14 @@ export const getAllCartItems = createSelector(getCartItems, (state) => state);
 export const getCartLoadingState = (state) => state.cartItem.loading;
 export const getCartError = (state) => state.cartItem.error;
 
+export const fetchCartItemsData = () => (dispatch) => {
+  dispatch(fetchCartItem());
+  fetch("https://fakestoreapi.com/carts")
+    .then((response) => response.json())
+    .then((data) => dispatch(loadCartItems(data)))
+    .catch((e) => dispatch(fetchCartItemsError()));
+};
+
 // console.log(addCartItem(1233));
 
 /*

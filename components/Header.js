@@ -6,12 +6,14 @@ import CartIcon from "url:../assets/cart-icon.svg";
 import HeartIcon from "url:../assets/heart-icon.svg";
 import {
   fetchProducts,
+  fetchProductsData,
   fetchProductsError,
   updateAllProducts,
 } from "../store/slices/productsSlice";
 import { productsList } from "../constants/productsList";
 import {
   fetchCartItem,
+  fetchCartItemsData,
   fetchCartItemsError,
   loadCartItems,
 } from "../store/slices/cartSlice";
@@ -46,14 +48,15 @@ export default function Header() {
     //   },
     // });
 
-    dispatch(
-      fetchData({
-        url: "/products",
-        onStart: fetchProducts.type,
-        onSuccess: updateAllProducts.type,
-        onError: fetchProductsError.type,
-      })
-    );
+    // dispatch(
+    //   fetchData({
+    //     url: "/products",
+    //     onStart: fetchProducts.type,
+    //     onSuccess: updateAllProducts.type,
+    //     onError: fetchProductsError.type,
+    //   })
+    // );
+    dispatch(fetchProductsData());
 
     // dispatch(fetchCartItem());
     // fetch("https://fakestoreapi.com/carts")
@@ -71,14 +74,16 @@ export default function Header() {
     //   },
     // });
 
-    dispatch(
-      fetchData({
-        url: "/carts",
-        onStart: fetchCartItem.type,
-        onSuccess: loadCartItems.type,
-        onError: fetchCartItemsError.type,
-      })
-    );
+    // dispatch(
+    //   fetchData({
+    //     url: "/carts",
+    //     onStart: fetchCartItem.type,
+    //     onSuccess: loadCartItems.type,
+    //     onError: fetchCartItemsError.type,
+    //   })
+    // );
+
+    dispatch(fetchCartItemsData());
   }, []);
 
   return (
