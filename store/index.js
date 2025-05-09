@@ -7,6 +7,7 @@ import productsReducer from "./slices/productsSlice";
 import wishListReducer from "./slices/wishListSlice";
 import { apiMiddleware } from "./middleware/api";
 import { func } from "./middleware/func";
+import { logger } from "./middleware/logger";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,7 @@ export const store = configureStore({
     wishList: wishListReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiMiddleware, func),
+    getDefaultMiddleware().concat(apiMiddleware, func, logger),
   // devTools: false, //enable and disable dev tools
 });
 

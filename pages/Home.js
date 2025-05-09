@@ -12,8 +12,6 @@ export default function Home() {
   const loading = useSelector(getProductLoadingState);
   const error = useSelector(getProductError);
 
-  console.log(error);
-
   if (loading) return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
 
   if (error) return <h2 style={{ textAlign: "center" }}>{error}</h2>;
